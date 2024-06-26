@@ -32,16 +32,28 @@
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form>
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
                     <h1>Login Form</h1>
                     <div>
-                        <input type="text" class="form-control" placeholder="Username" required="" />
+                        <input  class="form-control" type="email" name="email" placeholder="Email" />
                     </div>
                     <div>
-                        <input type="password" class="form-control" placeholder="Password" required="" />
+                        <input  class="form-control"  type="password" name="password" placeholder="Password" />
                     </div>
                     <div>
-                        <a class="btn btn-default submit" href="index.html">Log in</a>
+                        <button  type="submit" class="btn btn-default submit" >Log in</button>
                         <a class="reset_pass" href="#">Lost your password?</a>
                     </div>
 
@@ -66,19 +78,25 @@
 
         <div id="register" class="animate form registration_form">
             <section class="login_content">
-                <form>
-                    <h1>Create Account</h1>
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+                <h1>Create Account</h1>
                     <div>
-                        <input type="text" class="form-control" placeholder="Username" required="" />
+                        <input type="text" name="name" placeholder="Name" class="form-control" />
                     </div>
                     <div>
-                        <input type="email" class="form-control" placeholder="Email" required="" />
+                        <input type="email" name="email" placeholder="Email" class="form-control" />
                     </div>
                     <div>
-                        <input type="password" class="form-control" placeholder="Password" required="" />
+                        <input type="password" name="password" placeholder="Password"class="form-control"  />
                     </div>
                     <div>
-                        <a class="btn btn-default submit" href="index.html">Submit</a>
+                        <button type="submit" class="btn btn-default submit" >Submit</button>
                     </div>
 
                     <div class="clearfix"></div>

@@ -5,11 +5,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\UserController;
 
-Auth::routes();
+//Route::get('/register', [UserController::class, 'showRegistrationForm']);
+Route::post('/register', [UserController::class, 'register'])->name('register');
+
+Route::get('/login', [UserController::class, 'showLoginForm']);
+Route::post('/login', [UserController::class, 'login'])->name('login');
+
+//Auth::routes();
 
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/home', [App\Http\Controllers\UserController::class, 'index'])->name('home');
