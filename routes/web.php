@@ -37,4 +37,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
+
+
+Route::get('/park', [\App\Http\Controllers\UserParkingController::class, 'index']);
+
+
 require __DIR__ . '/auth.php';
