@@ -14,4 +14,10 @@ class UserParkingController extends Controller
     {
         return view('user.park');
     }
+
+
+    public function history()
+    {
+        return view('user.history');
+    }
 }

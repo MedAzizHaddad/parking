@@ -43,5 +43,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/park', [\App\Http\Controllers\UserParkingController::class, 'index']);
 
+Route::get('/history', [\App\Http\Controllers\UserParkingController::class, 'history']);
+
 
 require __DIR__ . '/auth.php';
