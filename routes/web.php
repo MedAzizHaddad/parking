@@ -7,6 +7,10 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\UserController;
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 //Route::get('/register', [UserController::class, 'showRegistrationForm']);
 Route::post('/register', [UserController::class, 'register'])->name('register');
 
