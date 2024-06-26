@@ -41,9 +41,19 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('/park', [\App\Http\Controllers\UserParkingController::class, 'index']);
+Route::get('/park', [\App\Http\Controllers\UserParkingController::class, 'index'])->name('park');
 
-Route::get('/history', [\App\Http\Controllers\UserParkingController::class, 'history']);
+Route::get('/history', [\App\Http\Controllers\UserParkingController::class, 'history'])->name('history');
+
+
+Route::get('/addParking', [\App\Http\Controllers\AdminParkingController::class, 'index'])->name('addParking');
+
+
+Route::get('/reservations', [\App\Http\Controllers\AdminParkingController::class, 'reservation'])->name('reservations');
+
+
+
+Route::get('/users', [\App\Http\Controllers\AdminUsersController::class, 'index'])->name('users');
 
 
 require __DIR__ . '/auth.php';

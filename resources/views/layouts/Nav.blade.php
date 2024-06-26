@@ -26,13 +26,31 @@
     <!-- sidebar menu -->
     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
         <div class="menu_section">
-            <ul class="nav side-menu">
-                <li href="index.html"><a href="/park"><i class="fa fa-car" ></i> Réserver </a></li>
-            </ul>
+            @auth
+                @if(Auth::user()->role === 'user')
+                    <ul class="nav side-menu">
+                        <li><a href="{{ route('park') }}"><i class="fa fa-car"></i> Réserver </a></li>
+                    </ul>
 
-            <ul class="nav side-menu">
-                <li href="index.html"><a href="/history"><i class="fa fa-list" ></i> History </a></li>
-            </ul>
+                    <ul class="nav side-menu">
+                        <li><a href="{{ route('history') }}"><i class="fa fa-list"></i> History </a></li>
+                    </ul>
+                @endif
+
+                @if(Auth::user()->role === 'admin')
+                    <ul class="nav side-menu">
+                        <li><a href="{{ route('addParking') }}"><i class="fa fa-plus-square"></i> Ajouter espace parking </a></li>
+                    </ul>
+
+                    <ul class="nav side-menu">
+                        <li><a href="{{ route('reservations') }}"><i class="fa fa-list"></i> List reservations </a></li>
+                    </ul>
+
+                    <ul class="nav side-menu">
+                        <li><a href="{{ route('users') }}"><i class="fa fa-user"></i> List utilisateurs </a></li>
+                    </ul>
+                @endif
+            @endauth
         </div>
     </div>
     <!-- /menu footer buttons -->
