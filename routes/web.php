@@ -41,19 +41,27 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::get('/park', [\App\Http\Controllers\UserParkingController::class, 'index'])->name('park');
-
-Route::get('/history', [\App\Http\Controllers\UserParkingController::class, 'history'])->name('history');
-
-
-Route::get('/addParking', [\App\Http\Controllers\AdminParkingController::class, 'index'])->name('addParking');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/addParking', [\App\Http\Controllers\AdminParkingController::class, 'index'])->name('addParking');
 
 
-Route::get('/reservations', [\App\Http\Controllers\AdminParkingController::class, 'reservation'])->name('reservations');
+    Route::get('/reservations', [\App\Http\Controllers\AdminParkingController::class, 'reservation'])->name('reservations');
 
 
 
-Route::get('/users', [\App\Http\Controllers\AdminUsersController::class, 'index'])->name('users');
+    Route::get('/users', [\App\Http\Controllers\AdminUsersController::class, 'index'])->name('users');
+
+
+});
+
+
+
+
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/park', [\App\Http\Controllers\UserParkingController::class, 'index'])->name('park');
+
+    Route::get('/history', [\App\Http\Controllers\UserParkingController::class, 'history'])->name('history');
+});
 
 
 require __DIR__ . '/auth.php';
