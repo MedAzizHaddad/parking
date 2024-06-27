@@ -39,7 +39,7 @@ class ParkingController extends Controller
 
     public function edit(Parking $parking)
     {
-        return view('parkings.edit', compact('parking'));
+        return view('admin.editparking', compact('parking'));
     }
 
     public function update(Request $request, Parking $parking)

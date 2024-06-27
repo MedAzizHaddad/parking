@@ -45,14 +45,18 @@
                             <div class="x_content">
 
                                     <!-- Your parking details content here -->
-                                    <div class="container">
-                                        <h1>Parking Details</h1>
-                                        {{ dump($parking) }}
-                                        <p>Name: {{ $parking->nom }}</p>
-                                        <p>Details: {{ $parking->details }}</p>
-                                        <p>Capacity: {{ $parking->capacite }}</p>
-                                        <!-- Add more details as needed -->
+                                <div class="container">
+                                    <h1>Détails du parking</h1>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $parking->nom }}</h5>
+                                            <p class="card-text"><strong>Détails:</strong> {{ $parking->details }}</p>
+                                            <p class="card-text"><strong>Capacité:</strong> {{ $parking->capacite }}</p>
+                                        </div>
                                     </div>
+                                    <a href="{{ route('parkings.edit', $parking->id) }}" class="btn btn-warning mt-3">Modifier</a>
+                                    <a href="{{ route('parkings.index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+                                </div>
 
                             </div>
                         </div>

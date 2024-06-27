@@ -48,8 +48,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/addParking', [\App\Http\Controllers\ParkingController::class, 'create'])->name('addParking');
     Route::get('/parkings', [\App\Http\Controllers\ParkingController::class, 'index'])->name('parkings.index');
     Route::post('/parkingStore', [\App\Http\Controllers\ParkingController::class, 'store'])->name('parkingStore');
-    Route::get('/parkingsshow', [\App\Http\Controllers\ParkingController::class, 'show'])->name('parkings.show');
-    Route::post('/parkingsedit', [\App\Http\Controllers\ParkingController::class, 'edit'])->name('parkings.edit');
+    Route::get('/parkings/{parking}', [App\Http\Controllers\ParkingController::class, 'show'])->name('parkings.show');
+    Route::get('/parkings/{parking}/edit', [App\Http\Controllers\ParkingController::class, 'edit'])->name('parkings.edit');
+    Route::put('/parkings/{parking}', [App\Http\Controllers\ParkingController::class, 'update'])->name('parkings.update');
     Route::delete('/parkings/{parking}', [App\Http\Controllers\ParkingController::class, 'destroy'])->name('parkings.destroy');
     Route::get('/reservations', [\App\Http\Controllers\AdminParkingController::class, 'reservation'])->name('reservations');
     Route::get('/users', [\App\Http\Controllers\AdminUsersController::class, 'index'])->name('users');

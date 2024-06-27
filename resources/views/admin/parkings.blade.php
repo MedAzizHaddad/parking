@@ -62,9 +62,8 @@
                                             <td>{{ $parking->nom }}</td>
                                             <td>{{ $parking->capacite }}</td>
                                             <td>
-                                                <a href="{{ route('parkings.show', $parking) }}" class="btn btn-sm btn-info">Voir</a>
-                                                <a href="{{ route('parkings.edit', $parking) }}" class="btn btn-sm btn-warning">Modifier</a>
-                                                <form action="{{ route('parkings.destroy', $parking->id) }}" method="POST" style="display: inline-block;">
+                                                <a href="{{ route('parkings.show', $parking->id) }}" class="btn btn-sm btn-info">Voir</a>
+                                                <a href="{{ route('parkings.edit', $parking->id) }}" class="btn btn-sm btn-warning">Modifier</a>   <form action="{{ route('parkings.destroy', $parking->id) }}" method="POST" style="display: inline-block;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce parking ?')">Supprimer</button>
