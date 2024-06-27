@@ -63,7 +63,7 @@ class UserController extends Controller
 
             // Redirect based on role
             if ($role === 'admin') {
-                return redirect()->intended('/admin');
+                return redirect()->intended('/parkings');
             } elseif ($role === 'user') {
                 return redirect()->intended('/home');
             }

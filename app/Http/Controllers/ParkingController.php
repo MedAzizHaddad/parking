@@ -57,10 +57,7 @@ class ParkingController extends Controller
 
     public function destroy(Parking $parking)
     {
-        Log::info('Showing the user profile for user: {id}', ['id' => $parking->all()]);
-        dd($parking);
         $parking->delete();
-
         return redirect()->route('parkings.index')->with('success', 'Parking supprimé avec succès.');
     }
 }
