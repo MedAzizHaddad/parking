@@ -51,11 +51,12 @@
                                         <p class="card-text"><strong>Date:</strong> {{ $reservation->date }}</p>
                                         <p class="card-text"><strong>Heures:</strong> {{ $reservation->heures }}</p>
                                         <p class="card-text"><strong>Montant:</strong> {{ $reservation->montant }}</p>
-                                        <p class="card-text"><strong>Parking:</strong> {{ $reservation->parking->nom }}</p>
+                                        <p class="card-text"><strong>Parking nom:</strong> {{ $reservation->parking->nom }}</p>
+                                        <p class="card-text"><strong>Parking détails:</strong> {{ $reservation->parking->details }}</p>
                                     </div>
                                 </div>
-                                <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-warning mt-3">Modifier</a>
-                                <a href="{{ route('reservations.index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+{{--                                <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-warning mt-3">Modifier</a>--}}
+                                <a href="{{ route('reservations.user') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
                             </div>
                         </div>
                     </div>

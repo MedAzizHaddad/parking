@@ -52,11 +52,17 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/parkings/{parking}/edit', [App\Http\Controllers\ParkingController::class, 'edit'])->name('parkings.edit');
     Route::put('/parkings/{parking}', [App\Http\Controllers\ParkingController::class, 'update'])->name('parkings.update');
     Route::delete('/parkings/{parking}', [App\Http\Controllers\ParkingController::class, 'destroy'])->name('parkings.destroy');
-    Route::get('/reservations', [\App\Http\Controllers\AdminParkingController::class, 'reservation'])->name('reservations');
+//    Route::get('/reservations', [\App\Http\Controllers\AdminParkingController::class, 'reservation'])->name('reservations');
     Route::get('/users', [\App\Http\Controllers\AdminUsersController::class, 'index'])->name('users');
 
+    Route::get('/admin/reservations', [ReservationController::class, 'adminIndex'])->name('reservations.admin');
 
+    Route::put('/reservations/{reservation}/approve', [ReservationController::class, 'approve'])->name('reservations.approve');
+    Route::put('/reservations/{reservation}/decline', [ReservationController::class, 'decline'])->name('reservations.decline');
+    //    Route::put('/reservations/{reservation}/approve', [ReservationController::class, 'approve'])->name('reservations.approve');
+//    Route::put('/reservations/{reservation}/decline', [ReservationController::class, 'decline'])->name('reservations.decline');
 });
+
 
 
 
@@ -66,13 +72,15 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/history', [\App\Http\Controllers\UserParkingController::class, 'history'])->name('history');
 
 // Index - List all reservations
-    Route::get('/reservations', [\App\Http\Controllers\ReservationController::class, 'index'])->name('reservations.index');
+    Route::get('/mes-reservations', [ReservationController::class, 'userIndex'])->name('reservations.user');
 
 // Create - Show the form to create a new reservation
     Route::get('/reservations/create', [\App\Http\Controllers\ReservationController::class, 'create'])->name('reservations.create');
 
 // Store - Save a new reservation
     Route::post('/reservationStore', [\App\Http\Controllers\ReservationController::class, 'store'])->name('reservations.store');
+
+    Route::put('/reservations/{reservation}/cancel', [ReservationController::class, 'cancel'])->name('reservations.cancel');
 
 // Show - Display a specific reservation
     Route::get('/reservations/{reservation}', [\App\Http\Controllers\ReservationController::class, 'show'])->name('reservations.show');

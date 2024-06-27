@@ -44,35 +44,37 @@
                         </div>
                         <div class="x_content">
                             <div class="container">
-                                <h1>Liste des réservations</h1>
+                                <h1>Mes réservations</h1>
                                 <a href="{{ route('reservations.create') }}" class="btn btn-primary mb-3">Nouvelle réservation</a>
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Date</th>
                                         <th>Heures</th>
                                         <th>Montant</th>
                                         <th>Parking</th>
-                                        <th>Actions</th>
+                                        <th>Statut</th>
+                                        <th>ac</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach($reservations as $reservation)
                                         <tr>
-                                            <td>{{ $reservation->id }}</td>
                                             <td>{{ $reservation->date }}</td>
                                             <td>{{ $reservation->heures }}</td>
                                             <td>{{ $reservation->montant }}</td>
                                             <td>{{ $reservation->parking->nom }}</td>
+                                            <td>{{ $reservation->statut }}</td>
                                             <td>
-                                                <a href="{{ route('reservations.show', $reservation->id) }}" class="btn btn-sm btn-info">Voir</a>
-                                                <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-sm btn-warning">Modifier</a>
-                                                <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" style="display: inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')">Supprimer</button>
-                                                </form>
+                                                @if($reservation->statut === 'en_attente')
+                                                    <form action="{{ route('reservations.cancel', $reservation->id) }}" method="POST" style="display: inline-block;">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" class="btn btn-sm btn-warning" onclick="return confirm('Êtes-vous sûr de vouloir annuler cette réservation ?')">Annuler</button>
+                                                    </form>
+                                                @endif
+                                                    <a href="{{ route('reservations.show', $reservation->id) }}" class="btn btn-sm btn-info">Voir</a>
+
                                             </td>
                                         </tr>
                                     @endforeach

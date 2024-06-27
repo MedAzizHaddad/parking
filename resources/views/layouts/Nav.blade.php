@@ -29,7 +29,7 @@
             @auth
                 @if(Auth::user()->role === 'user')
                     <ul class="nav side-menu">
-                        <li><a href="{{ route('reservations.index') }}"><i class="fa fa-car"></i> Réserver </a></li>
+                        <li><a href="{{ route('reservations.user') }}"><i class="fa fa-car"></i> Réserver </a></li>
                     </ul>
 
                     <ul class="nav side-menu">
@@ -43,7 +43,7 @@
                     </ul>
 
                     <ul class="nav side-menu">
-                        <li><a href="{{ route('reservations.index') }}"><i class="fa fa-list"></i> List reservations </a></li>
+                        <li><a href="{{ route('reservations.admin') }}"><i class="fa fa-list"></i> List reservations </a></li>
                     </ul>
 
                     <ul class="nav side-menu">

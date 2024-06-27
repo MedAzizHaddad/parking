@@ -8,10 +8,21 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
-    public function index()
+    public function userIndex()
     {
-        $reservations = Reservation::with('parking')->get();
-        return view('reservations.index', compact('reservations'));
+        $reservations = auth()->user()->reservations()
+            ->with('parking')
+            ->orderBy('date', 'desc')
+            ->get();
+        return view('reservations.user-index', compact('reservations'));
+    }
+
+    public function adminIndex()
+    {
+        $reservations = Reservation::with('parking', 'user')
+            ->orderBy('date', 'desc')
+            ->get();
+        return view('reservations.admin-index', compact('reservations'));
     }
 
     public function create()
@@ -29,9 +40,13 @@ class ReservationController extends Controller
             'parking_id' => 'required|exists:parkings,id',
         ]);
 
+        // Add the user_id and statut to the validated data
+        $validatedData['user_id'] = auth()->id();
+        $validatedData['statut'] = 'en_attente';
+
         Reservation::create($validatedData);
 
-        return redirect()->route('reservations.index')->with('success', 'Réservation créée avec succès.');
+        return redirect()->route('reservations.user')->with('success', 'Réservation créée avec succès.');
     }
 
     public function show(Reservation $reservation)
@@ -65,4 +80,32 @@ class ReservationController extends Controller
 
         return redirect()->route('reservations.index')->with('success', 'Réservation supprimée avec succès.');
     }
+
+    public function approve(Reservation $reservation)
+    {
+//        $this->authorize('update', $reservation);
+        $reservation->update(['statut' => 'approuvée']);
+        return redirect()->back()->with('success', 'Réservation approuvée.');
+    }
+
+    public function decline(Reservation $reservation)
+    {
+        $reservation->update(['statut' => 'refusée']);
+        return redirect()->back()->with('success', 'Réservation refusée.');
+    }
+
+    public function cancel(Reservation $reservation)
+    {
+        if (auth()->id() !== $reservation->user_id) {
+            return redirect()->back()->with('error', 'Vous n\'êtes pas autorisé à annuler cette réservation.');
+        }
+
+        if ($reservation->statut !== Reservation::STATUS_EN_ATTENTE) {
+            return redirect()->back()->with('error', 'Vous ne pouvez annuler que les réservations en attente.');
+        }
+
+        $reservation->update(['statut' => Reservation::STATUS_ANNULEE]);
+        return redirect()->back()->with('success', 'Réservation annulée avec succès.');
+    }
+
 }
