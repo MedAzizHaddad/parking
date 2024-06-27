@@ -29,21 +29,21 @@
             @auth
                 @if(Auth::user()->role === 'user')
                     <ul class="nav side-menu">
-                        <li><a href="{{ route('park') }}"><i class="fa fa-car"></i> Réserver </a></li>
+                        <li><a href="{{ route('reservations.index') }}"><i class="fa fa-car"></i> Réserver </a></li>
                     </ul>
 
                     <ul class="nav side-menu">
-                        <li><a href="{{ route('history') }}"><i class="fa fa-list"></i> History </a></li>
+                        <li><a  href="{{ route('profile.edit') }}" target="_blank"><i class="fa fa-user"></i> Profile </a></li>
                     </ul>
                 @endif
 
                 @if(Auth::user()->role === 'admin')
                     <ul class="nav side-menu">
-                        <li><a href="{{ route('addParking') }}"><i class="fa fa-plus-square"></i> Ajouter espace parking </a></li>
+                        <li><a href="{{ route('parkings.index') }}"><i class="fa fa-plus-square"></i> Ajouter espace parking </a></li>
                     </ul>
 
                     <ul class="nav side-menu">
-                        <li><a href="{{ route('reservations') }}"><i class="fa fa-list"></i> List reservations </a></li>
+                        <li><a href="{{ route('reservations.index') }}"><i class="fa fa-list"></i> List reservations </a></li>
                     </ul>
 
                     <ul class="nav side-menu">

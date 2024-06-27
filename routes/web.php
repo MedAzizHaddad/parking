@@ -64,6 +64,29 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/park', [\App\Http\Controllers\UserParkingController::class, 'index'])->name('reservations.create');
     Route::get('/history', [\App\Http\Controllers\UserParkingController::class, 'history'])->name('history');
+
+// Index - List all reservations
+    Route::get('/reservations', [\App\Http\Controllers\ReservationController::class, 'index'])->name('reservations.index');
+
+// Create - Show the form to create a new reservation
+    Route::get('/reservations/create', [\App\Http\Controllers\ReservationController::class, 'create'])->name('reservations.create');
+
+// Store - Save a new reservation
+    Route::post('/reservationStore', [\App\Http\Controllers\ReservationController::class, 'store'])->name('reservations.store');
+
+// Show - Display a specific reservation
+    Route::get('/reservations/{reservation}', [\App\Http\Controllers\ReservationController::class, 'show'])->name('reservations.show');
+
+// Edit - Show the form to edit a reservation
+    Route::get('/reservations/{reservation}/edit', [\App\Http\Controllers\ReservationController::class, 'edit'])->name('reservations.edit');
+
+// Update - Save changes to a reservation
+    Route::put('/reservations/{reservation}', [\App\Http\Controllers\ReservationController::class, 'update'])->name('reservations.update');
+
+// Destroy - Delete a reservation
+    Route::delete('/reservations/{reservation}', [\App\Http\Controllers\ReservationController::class, 'destroy'])->name('reservations.destroy');
+
+
 });
 
 
