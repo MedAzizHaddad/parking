@@ -45,6 +45,11 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
+
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+
     Route::get('/addParking', [\App\Http\Controllers\ParkingController::class, 'create'])->name('addParking');
     Route::get('/parkings', [\App\Http\Controllers\ParkingController::class, 'index'])->name('parkings.index');
     Route::post('/parkingStore', [\App\Http\Controllers\ParkingController::class, 'store'])->name('parkingStore');
@@ -53,7 +58,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/parkings/{parking}', [App\Http\Controllers\ParkingController::class, 'update'])->name('parkings.update');
     Route::delete('/parkings/{parking}', [App\Http\Controllers\ParkingController::class, 'destroy'])->name('parkings.destroy');
 //    Route::get('/reservations', [\App\Http\Controllers\AdminParkingController::class, 'reservation'])->name('reservations');
-    Route::get('/users', [\App\Http\Controllers\AdminUsersController::class, 'index'])->name('users');
+//    Route::get('/users', [\App\Http\Controllers\AdminUsersController::class, 'index'])->name('users');
 
     Route::get('/admin/reservations', [ReservationController::class, 'adminIndex'])->name('reservations.admin');
 

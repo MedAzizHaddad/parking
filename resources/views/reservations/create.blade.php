@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +48,8 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="date">Date</label>
-                                        <input type="datetime-local" class="form-control" id="date" name="date" required>
+                                        <input type="datetime-local" class="form-control" id="date" name="date"
+                                               min="{{ date('Y-m-d\TH:i') }}" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="heures">Heures</label>
@@ -57,7 +57,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="montant">Montant</label>
-                                        <input type="number" class="form-control" id="montant" name="montant" min="0" step="0.01" required>
+                                        <input type="number" class="form-control" id="montant" name="montant" min="0"
+                                               step="0.01" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="parking_id">Parking</label>

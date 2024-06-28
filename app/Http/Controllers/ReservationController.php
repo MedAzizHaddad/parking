@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reservation;
+use App\Helpers\ReservationHelper;
 use App\Models\Parking;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -34,9 +35,8 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'date' => 'required|date',
+            'date' => 'required|date|after:now',
             'heures' => 'required|integer|min:1',
-            'montant' => 'required|numeric|min:0',
             'parking_id' => 'required|exists:parkings,id',
         ]);
 

@@ -12,7 +12,14 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $users = User::all();
+        return view('users.index', compact('users'));
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'Utilisateur supprimé avec succès.');
     }
 
     public function showRegistrationForm()

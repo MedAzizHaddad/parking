@@ -47,7 +47,7 @@
                     </ul>
 
                     <ul class="nav side-menu">
-                        <li><a href="{{ route('users') }}"><i class="fa fa-user"></i> List utilisateurs </a></li>
+                        <li><a href="{{ route('users.index') }}"><i class="fa fa-user"></i> List utilisateurs </a></li>
                     </ul>
                 @endif
             @endauth
