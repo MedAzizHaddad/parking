@@ -37,6 +37,7 @@ class ReservationController extends Controller
         $validatedData = $request->validate([
             'date' => 'required|date|after:now',
             'heures' => 'required|integer|min:1',
+            'montant' => 'required|numeric|min:0', // Add this line
             'parking_id' => 'required|exists:parkings,id',
         ]);
 
