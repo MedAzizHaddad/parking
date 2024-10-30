@@ -42,24 +42,29 @@
                             </ul>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="container">
-                            <h1>Ajouter un parking</h1>
-                            <form action="{{ route('parkingStore') }}" method="POST">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="nom">Nom</label>
-                                    <input type="text" class="form-control" id="nom" name="nom" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="details">Détails</label>
-                                    <textarea class="form-control" id="details" name="details" rows="3" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="capacite">Capacité</label>
-                                    <input type="number" class="form-control" id="capacite" name="capacite" min="1" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Ajouter</button>
-                            </form>
+                        <div class="x_content">
+                            <div class="container">
+                                <h1>Modifier le parking</h1>
+                                <form action="{{ route('parkings.update', $parking->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="form-group">
+                                        <label for="nom">Nom</label>
+                                        <input type="text" class="form-control" id="nom" name="nom" value="{{ $parking->nom }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="details">Détails</label>
+                                        <textarea class="form-control" id="details" name="details" rows="3" required>{{ $parking->details }}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="capacite">Capacité</label>
+                                        <input type="number" class="form-control" id="capacite" name="capacite" value="{{ $parking->capacite }}" min="1" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                </form>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>

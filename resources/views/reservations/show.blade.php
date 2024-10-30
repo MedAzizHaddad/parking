@@ -42,24 +42,22 @@
                             </ul>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="container">
-                            <h1>Ajouter un parking</h1>
-                            <form action="{{ route('parkingStore') }}" method="POST">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="nom">Nom</label>
-                                    <input type="text" class="form-control" id="nom" name="nom" required>
+                        <div class="x_content">
+                            <div class="container">
+                                <h1>Détails de la réservation</h1>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Réservation #{{ $reservation->id }}</h5>
+                                        <p class="card-text"><strong>Date:</strong> {{ $reservation->date }}</p>
+                                        <p class="card-text"><strong>Heures:</strong> {{ $reservation->heures }}</p>
+                                        <p class="card-text"><strong>Montant:</strong> {{ $reservation->montant }}</p>
+                                        <p class="card-text"><strong>Parking nom:</strong> {{ $reservation->parking->nom }}</p>
+                                        <p class="card-text"><strong>Parking détails:</strong> {{ $reservation->parking->details }}</p>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="details">Détails</label>
-                                    <textarea class="form-control" id="details" name="details" rows="3" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="capacite">Capacité</label>
-                                    <input type="number" class="form-control" id="capacite" name="capacite" min="1" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Ajouter</button>
-                            </form>
+{{--                                <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-warning mt-3">Modifier</a>--}}
+                                <a href="{{ route('reservations.user') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+                            </div>
                         </div>
                     </div>
                 </div>

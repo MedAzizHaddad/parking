@@ -12,7 +12,14 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $users = User::all();
+        return view('users.index', compact('users'));
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'Utilisateur supprimé avec succès.');
     }
 
     public function showRegistrationForm()
@@ -63,7 +70,7 @@ class UserController extends Controller
 
             // Redirect based on role
             if ($role === 'admin') {
-                return redirect()->intended('/admin');
+                return redirect()->intended('/parkings');
             } elseif ($role === 'user') {
                 return redirect()->intended('/home');
             }
